@@ -13,8 +13,12 @@ class CreateMatakuliahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('matakuliahs', function (Blueprint $table) {
+        Schema::create('matakuliah', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_matakuliah', 255)->nullable();
+            $table->integer('sks')->nullable();
+            $table->integer('jam')->nullable();
+            $table->integer('Dosen_id')->nullable();
             $table->timestamps();
         });
     }
