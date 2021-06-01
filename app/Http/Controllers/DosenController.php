@@ -67,9 +67,9 @@ class DosenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dosen $dosen)
     {
-        return view('dosen.edit', compact('Dosen'))
+        return view('dosen.edit', compact('dosen'));
     }
 
     /**

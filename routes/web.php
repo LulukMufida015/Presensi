@@ -26,6 +26,6 @@ use App\Http\Controllers\MahasiswaController;
 Route::get('/', function () {
     return view('page/home');
 });
-Route::resource('dosen', DosenController::class)
+Route::resource('dosen', DosenController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 

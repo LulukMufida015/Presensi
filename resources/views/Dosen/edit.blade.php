@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Mahasiswa</h1>
+                    <h1>Edit Dosen</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">edit mahasiswa</li>
+                        <li class="breadcrumb-item"><a href="#">Dosen</a></li>
+                        <li class="breadcrumb-item active">edit dosen</li>
                     </ol>
                 </div>
             </div>
@@ -27,34 +27,34 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('mahasiswa.update', $mahasiswa->id) }}">
+                        <form method="post" action="{{ route('dosen.update', $dosen->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="NIM">NIM</label>
-                                    <input type="text" class="form-control" id="NIM"
-                                        placeholder="NIM" value="{{ $mahasiswa->nim }}" name="nim">
+                                    <label for="NIP">NIP</label>
+                                    <input type="text" class="form-control" id="NIP"
+                                        placeholder="NIP" value="{{ $dosen->nip }}" name="nip">
                                 </div>
                                 <div class="form-group">
                                     <label for="Nama">Nama</label>
                                     <input type="text" class="form-control" id="Nama"
-                                        placeholder="Nama" value="{{ $mahasiswa->nama }}" name="nama">
+                                        placeholder="Nama" value="{{ $dosen->nama_dosen }}" name="nama_dosen">
                                 </div>
                                 <div class="form-group">
                                     <label for="Jenis-Kelamin">Jenis Kelamin</label>
                                     <input type="text" class="form-control" id="Jenis-Kelamin"
-                                        placeholder="Jenis-Kelamin" value="{{ $mahasiswa->jenis_kelamin }}" name="jenis_kelamin">
+                                        placeholder="Jenis-Kelamin" value="{{ $dosen->jenis_kelamin }}" name="jenis_kelamin">
                                 </div>
                                 <div class="form-group">
                                     <label for="No-Handphone">No Handphone</label>
                                     <input type="text" class="form-control" id="No-Handphone"
-                                        placeholder="No-Handphone" value="{{ $mahasiswa->no_handphone }}" name="no_handphone">
+                                        placeholder="No-Handphone" value="{{ $dosen->no_handphone }}" name="no_handphone">
                                 </div>
                                 <div class="form-group">
                                     <label for="Alamat">Alamat</label>
                                     <input type="text" class="form-control" id="Alamat"
-                                        placeholder="Alamat" value="{{ $mahasiswa->alamat }}" name="alamat">
+                                        placeholder="Alamat" value="{{ $dosen->alamat }}" name="alamat">
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="exampleInputFile">File input</label>
