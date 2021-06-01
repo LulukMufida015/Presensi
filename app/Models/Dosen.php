@@ -16,5 +16,5 @@ class Dosen extends Model
         'jenis_kelamin',
         'no_handphone',
         'alamat',
-    ]
+    ];
 }

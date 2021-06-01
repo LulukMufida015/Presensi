@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
 class DosenController extends Controller
@@ -13,7 +13,10 @@ class DosenController extends Controller
      */
     public function index()
     {
-        //
+        $Dosen = Dosen::all(); // Mengambil semua isi tabel
+        $posts = Dosen::orderBy('nip', 'desc')->paginate(6);
+        return view('dosen.index', compact('Dosen'));
+        with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -23,7 +26,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('dosen.create');
     }
 
     /**
@@ -34,7 +37,17 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nip' => 'required',
+            'nama_dosen' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_handphone' => 'required',
+            'alamat' => 'required',
+            ]);
+            //fungsi eloquent untuk menambah data
+            Dosen::create($request->all());
+            return redirect()->route('dosen.index')
+        ->with('success', 'Dosen Berhasil Ditambahkan');
     }
 
     /**
@@ -56,7 +69,7 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('dosen.edit', compact('Dosen'))
     }
 
     /**
@@ -68,7 +81,18 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nip' => 'required',
+            'nama_dosen' => 'required',
+            'jenis_kelamin' => 'required',
+            'no_handphone' => 'required',
+            'alamat' => 'required',
+            ]);
+        //fungsi eloquent untuk mengupdate data inputan kita
+        Dosen::find($id)->update($request->all());
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('dosen.index')
+        ->with('success', 'Dosen Berhasil Diupdate');
     }
 
     /**
@@ -79,6 +103,8 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Dosen->delete();
+        return redirect()->route('dosen.index')
+        -> with('success', 'Dosen Berhasil Dihapus');
     }
 }
