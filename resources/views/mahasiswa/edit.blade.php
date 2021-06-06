@@ -63,18 +63,6 @@
                                     <input type="text" class="form-control" id="Alamat"
                                         placeholder="Alamat" value="{{ $mahasiswa->alamat }}" name="alamat">
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <!-- /.card-body -->
 

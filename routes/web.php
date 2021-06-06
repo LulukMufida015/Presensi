@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,5 @@ Route::get('/contact', function () {
     return view('page/contact');
 });
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::resource('kelass', KelasController::class);
 
