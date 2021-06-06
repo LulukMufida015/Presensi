@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">edit mahasiswa</li>
                     </ol>
                 </div>
@@ -27,19 +27,26 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('mahasiswa.update', $mahasiswa->id) }}">
+                        <form method="post" action="{{ route('mahasiswa.update', $mahasiswa->id) }}"  enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="NIM">NIM</label>
-                                    <input type="text" class="form-control" id="NIM"
+                                    <label for="nim">NIM</label>
+                                    <input type="text" class="form-control" id="nim"
                                         placeholder="NIM" value="{{ $mahasiswa->nim }}" name="nim">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Nama">Nama</label>
+                                    <label for="Foto">Nama</label>
                                     <input type="text" class="form-control" id="Nama"
                                         placeholder="Nama" value="{{ $mahasiswa->nama }}" name="nama">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Foto">Foto</label>
+                                    <input type="file" class="form-control" id="Foto"
+                                        placeholder="Foto" value="{{ $mahasiswa->foto }}" name="foto">
+                                        <br>
+                                        <img width="150px" src="{{asset('storage/'.$mahasiswa->foto)}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="Jenis-Kelamin">Jenis Kelamin</label>

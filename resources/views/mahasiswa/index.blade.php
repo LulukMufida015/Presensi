@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index') }}">Home</a></li>
                 <li class="breadcrumb-item active">tabel mahasiswa</li>
               </ol>
             </div>
@@ -60,7 +60,7 @@
                               <td>{{ $mhs->alamat }}</td>
                               <td>
                               <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->id]) }}" method="POST">
-                              {{-- <a class="btn btn-info" href="{{ route('mahasiswa.show',['mahasiswa'=>$mhs->nim]) }}">Show</a> --}}
+                                <a class="btn btn-info" href="{{ route('mahasiswa.show',['mahasiswa'=>$mhs->id]) }}">Show</a>
                               <a class="btn btn-primary" href="{{ route('mahasiswa.edit',['mahasiswa'=>$mhs->id]) }}">Edit</a>
                               @csrf 
                               @method('DELETE')

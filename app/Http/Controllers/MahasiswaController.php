@@ -43,14 +43,27 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required',
             'jenis_kelamin' => 'required',
             'no_handphone' => 'required',
             'alamat' => 'required',
-            ]);
-            //fungsi eloquent untuk menambah data
-            Mahasiswa::create($request->all());
-            return redirect()->route('mahasiswa.index')
-        ->with('success', 'Mahasiswa Berhasil Ditambahkan');
+        ]);
+
+        $image = $request->file('foto');
+        if ($image) {
+            $image_name = $request->file('foto')->store('images', 'public');
+        }
+        // dd($request->all());
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->nim = $request->get('nim');
+        $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->foto = $image_name;
+        $mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
+        $mahasiswa->no_handphone = $request->get('no_handphone');
+        $mahasiswa->alamat = $request->get('alamat');
+        $mahasiswa->save();
+        return redirect()->route('mahasiswa.index')
+            ->with('success', 'Mahasiswa Berhasil Ditambahkan');
     }
 
     /**
@@ -61,7 +74,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.detail', compact('mahasiswa'));
     }
 
     /**
@@ -89,12 +102,26 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required',
             'jenis_kelamin' => 'required',
             'no_handphone' => 'required',
             'alamat' => 'required',
-            ]);
-        //fungsi eloquent untuk mengupdate data inputan kita
-        Mahasiswa::find($id)->update($request->all());
+        ]);
+        
+        
+        // dd($request->all());
+        $mahasiswa = Mahasiswa::find($id);
+        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+            \Storage::delete('public/' . $mahasiswa->foto);
+        }
+        $image_name = $request->file('foto')->store('images', 'public');
+        $mahasiswa->nim = $request->get('nim');
+        $mahasiswa->nama = $request->get('nama');
+        $mahasiswa->foto = $image_name;
+        $mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
+        $mahasiswa->no_handphone = $request->get('no_handphone');
+        $mahasiswa->alamat = $request->get('alamat');
+        $mahasiswa->save();
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
         ->with('success', 'Mahasiswa Berhasil Diupdate');
@@ -111,6 +138,6 @@ class MahasiswaController extends Controller
         //fungsi eloquent untuk menghapus data
         $mahasiswa->delete();
         return redirect()->route('mahasiswa.index')
-        -> with('success', 'Mahasiswa Berhasil Dihapus');
+            ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
 }

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">tambah mahasiswa</li>
                     </ol>
                 </div>
@@ -27,7 +27,7 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('mahasiswa.store') }}">
+                        <form method="post" action="{{ route('mahasiswa.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -36,10 +36,22 @@
                                         placeholder="NIM" name="nim">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Nama">Nama</label>
+                                    <label for="Foto">Nama</label>
                                     <input type="text" class="form-control" id="Nama"
                                         placeholder="Nama" name="nama">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Foto</label>
+                                    <div class="input-group">
+                                      <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="foto" name="foto">
+                                        <label class="custom-file-label" for="foto">Choose file</label>
+                                      </div>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                      </div>
+                                    </div>
+                                  </div>
                                 <div class="form-group">
                                     <label for="Jenis-Kelamin">Jenis Kelamin</label>
                                     <input type="text" class="form-control" id="Jenis-Kelamin"
