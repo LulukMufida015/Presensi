@@ -15,5 +15,5 @@ class Matakuliah extends Model
         'sks',
         'jam',
         'Dosen_id',
-    ]
+    ];
 }
