@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\JamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,5 @@ Route::get('/contact', function () {
 });
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('kelass', KelasController::class);
+Route::resource('jam', JamController::class);
 
