@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\JamController;
+use App\Http\Controllers\MatakuliahController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,30 +20,19 @@ use App\Http\Controllers\JamController;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
-// });
+//      return view('welcome');
+//  });
 
 // Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
     return view('page/home');
 });
-Route::get('/jadwal', function () {
-    return view('page/jadwal');
-});
-
-Route::get('/laporan', function () {
-    return view('page/laporan');
-});
-Route::get('/siswa', function () {
-    return view('page/siswa');
-});
-Route::get('/contact', function () {
-    return view('page/contact');
-});
+Route::resource('dosen', DosenController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('kelass', KelasController::class);
 Route::resource('jam', JamController::class);
+Route::resource('matakuliah', MatakuliahController::class);
+
 
