@@ -55,7 +55,7 @@
                                 <td>{{ $mk->nama_matakuliah }}</td>
                                 <td>{{ $mk->sks }}</td>
                                 <td>{{ $mk->jam }}</td>
-                                <td>{{ $mk->Dosen_id }}</td>
+                                <td>{{ $mk->dosen->nama_dosen }}</td>
                                 <td>
                                 <form action="{{ route('matakuliah.destroy',['matakuliah'=>$mk->id]) }}" method="POST">
                                 {{-- <a class="btn btn-info" href="{{ route('dosen.show',['mahasiswa'=>$dsn->nim]) }}">Show</a> --}}
