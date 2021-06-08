@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Matakuliah;
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
 class MatakuliahController extends Controller
@@ -13,7 +14,7 @@ class MatakuliahController extends Controller
      */
     public function index()
     {
-        $matakuliah = Matakuliah::all(); // Mengambil semua isi tabel
+        $matakuliah = Matakuliah::with('dosen')->get(); // Mengambil semua isi tabel
         $posts = Matakuliah::orderBy('id', 'desc')->paginate(6);
         return view('matakuliah.index', compact('matakuliah'));
         with('i', (request()->input('page', 1) - 1) * 5);
@@ -26,7 +27,8 @@ class MatakuliahController extends Controller
      */
     public function create()
     {
-        return view('matakuliah.create');
+        $dosen = Dosen::all();
+        return view('matakuliah.create', ['dosen' => $dosen]);
     }
 
     /**
@@ -41,10 +43,21 @@ class MatakuliahController extends Controller
             'nama_matakuliah' => 'required',
             'sks' => 'required',
             'jam' => 'required',
-            'Dosen_id'=> 'required',
+            'id_dosen'=> 'required',
             ]);
-            //fungsi eloquent untuk menambah data
-            Matakuliah::create($request->all());
+
+            $matakuliah = new Matakuliah;
+        $matakuliah->nama_matakuliah = $request->get('nama_matakuliah');
+        $matakuliah->sks = $request->get('sks');
+        $matakuliah->jam = $request->get('jam');
+            $dosen = new Dosen;
+            $dosen->id = $request->get('id_dosen');
+
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+            $matakuliah->dosen()->associate($dosen);
+            $matakuliah->save();
+
+
             return redirect()->route('matakuliah.index')
         ->with('success', 'Matakuliah Berhasil Ditambahkan');
     }
@@ -66,9 +79,11 @@ class MatakuliahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Matakuliah $matakuliah)
+    public function edit($id)
     {
-        return view('matakuliah.edit', compact('matakuliah'));
+        $matakuliah = Matakuliah::with('dosen')->where('id', $id)->first();
+        $dosen = Dosen::all(); 
+        return view('matakuliah.edit', compact('matakuliah','dosen'));
     }
 
     /**
@@ -84,10 +99,20 @@ class MatakuliahController extends Controller
             'nama_matakuliah' => 'required',
             'sks' => 'required',
             'jam' => 'required',
-            'Dosen_id'=> 'required',
+            'id_dosen'=> 'required',
             ]);
 
-        Matakuliah::find($id)->update($request->all());
+
+            $matakuliah = Matakuliah::with('dosen')->where('id', $id)->first();
+            $matakuliah->nama_matakuliah = $request->get('nama_matakuliah');
+        $matakuliah->sks = $request->get('sks');
+        $matakuliah->jam = $request->get('jam');
+            $dosen = new Dosen;
+            $dosen->id = $request->get('id_dosen');
+            $matakuliah->dosen()->associate($dosen);
+            $matakuliah->save();
+
+        // Matakuliah::find($id)->update($request->all());
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('matakuliah.index')
         ->with('success', 'Matakuliah Berhasil Diupdate');

@@ -47,8 +47,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Dosen_id">Dosen ID</label>
-                                    <input type="text" class="form-control" id="Dosen_id"
-                                        placeholder="Dosen_id" name="Dosen_id">
+                                    <select class="form-control" name="id_dosen">
+                                        @foreach($dosen as $dsn)
+                                        <option  value="{{$dsn->id }}" name="id_dosen"  id="id_dosen">{{$dsn->nama_dosen}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="exampleInputFile">File input</label>

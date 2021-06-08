@@ -36,3 +36,7 @@ Route::resource('jam', JamController::class);
 Route::resource('matakuliah', MatakuliahController::class);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
