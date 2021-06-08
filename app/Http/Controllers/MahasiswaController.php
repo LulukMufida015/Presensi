@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -12,13 +13,16 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //fungsi eloquent menampilkan data menggunakan pagination
-        $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
-        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
-        return view('mahasiswa.index', compact('mahasiswa'));
-        with('i', (request()->input('page', 1) - 1) * 5);
+        $mahasiswa = Mahasiswa::with('kelas')->get();
+        $page = Mahasiswa::orderBy('nim', 'asc')->paginate(6);
+        return view('mahasiswa.index', ['mahasiswa' => $mahasiswa, 'page' => $page]);
     }
 
     /**
@@ -28,7 +32,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        $kelas = Kelas::all(); //mendapatkan data dari tabel kelas
+        return view('mahasiswa.create', ['kelas' => $kelas]);
     }
 
     /**
@@ -43,6 +48,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'kelas' => 'required',
             'foto' => 'required',
             'jenis_kelamin' => 'required',
             'no_handphone' => 'required',
@@ -61,6 +67,12 @@ class MahasiswaController extends Controller
         $mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
         $mahasiswa->no_handphone = $request->get('no_handphone');
         $mahasiswa->alamat = $request->get('alamat');
+
+        $kelas = new Kelas;
+        $kelas->id = $request->get('kelas');
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $mahasiswa->kelas()->associate($kelas);
+
         $mahasiswa->save();
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Ditambahkan');
@@ -85,8 +97,9 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
+        $kelas = Kelas::all();
         //menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        return view('mahasiswa.edit', compact('mahasiswa','kelas'));
     }
 
     /**
@@ -99,14 +112,15 @@ class MahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         //melakukan validasi data
-        $request->validate([
-            'nim' => 'required',
-            'nama' => 'required',
-            'foto' => 'required',
-            'jenis_kelamin' => 'required',
-            'no_handphone' => 'required',
-            'alamat' => 'required',
-        ]);
+        // $request->validate([
+        //     'nim' => 'required',
+        //     'nama' => 'required',
+        //     'kelas' => 'required',
+        //     'foto' => 'required',
+        //     'jenis_kelamin' => 'required',
+        //     'no_handphone' => 'required',
+        //     'alamat' => 'required',
+        // ]);
         
         
         // dd($request->all());
@@ -114,13 +128,17 @@ class MahasiswaController extends Controller
         if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
             \Storage::delete('public/' . $mahasiswa->foto);
         }
-        $image_name = $request->file('foto')->store('images', 'public');
+        if($request->file('foto')!=null){
+            $image_name = $request->file('foto')->store('images', 'public');
+            $mahasiswa->foto = $image_name;
+        }
+       
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
-        $mahasiswa->foto = $image_name;
         $mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
         $mahasiswa->no_handphone = $request->get('no_handphone');
         $mahasiswa->alamat = $request->get('alamat');
+        $mahasiswa->kelas_id = $request->get('kelas');
         $mahasiswa->save();
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')

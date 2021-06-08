@@ -33,6 +33,7 @@
                                     <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><b>Nim: </b>{{$mahasiswa->nim}}</li>
                                     <li class="list-group-item"><b>Nama: </b>{{$mahasiswa->nama}}</li>
+                                    <li class="list-group-item"><b>Kelas: </b>{{$mahasiswa->kelas->nama_kelas}}</li>
                                     <li class="list-group-item"><b>Jenis Kelamin: </b>{{$mahasiswa->jenis_kelamin}}</li>
                                     <li class="list-group-item"><b>No_Handphone: </b>{{$mahasiswa->no_handphone}}</li>
                                     <li class="list-group-item"><b>Alamat: </b>{{$mahasiswa->alamat}}</li>

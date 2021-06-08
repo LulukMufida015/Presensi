@@ -44,6 +44,7 @@
                           <tr>
                             <th>NIM</th>
                             <th>Nama</th>
+                            <th>Kelas</th>
                             <th>Jenis Kelamin</th>
                             <th>No Handphone</th>
                             <th>Alamat</th>
@@ -55,6 +56,7 @@
                           <tr>
                               <td>{{ $mhs->nim }}</td>
                               <td>{{ $mhs->nama }}</td>
+                              <td>{{ $mhs->kelas->nama_kelas}}</td>
                               <td>{{ $mhs->jenis_kelamin }}</td>
                               <td>{{ $mhs->no_handphone }}</td>
                               <td>{{ $mhs->alamat }}</td>
