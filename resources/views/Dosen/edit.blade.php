@@ -27,10 +27,10 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('dosen.update', $dosen->id) }} " enctype="multipart/form-data>
+                        <form method="post" action="{{ route('dosen.update', $dosen->id) }} " enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="card-body">
+                            <div class= "card-body">
                                 <div class="form-group">
                                     <label for="NIP">NIP</label>
                                     <input type="text" class="form-control" id="NIP"

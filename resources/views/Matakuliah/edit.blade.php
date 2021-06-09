@@ -27,7 +27,7 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('matakuliah.update', $matakuliah->id) }}">
+                        <form method="post" action="{{ route('matakuliah.update', $matakuliah->id) }}" >
                             @csrf
                             @method('PUT')
                             <div class="card-body">

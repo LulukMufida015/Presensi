@@ -34,9 +34,9 @@
             </div>
             <div class="col-12 col-sm-6">
               <h3 class="my-3">Politeknik Tadika Mesra</h3>
-              <p>Polinema adalah institusi pendidikan tinggi vokasi yang terletak di kota Malang. Malang adalah kota terbesar kedua di Jawa Timur,Indonesia. Malang merupakan tempat yang nyaman untuk belajar karena udaranya yang sejuk dan populasi yang tidak begitu padat (sekitar 800 ribu penduduk). Di Malang terdapat banyak sekolah, universitas dan institusi pendidikan lainnya dengan kualitas yang bagus. Selain itu, Malang merupakan tempat yang mudah dijangkau. Kota ini dapat ditempuh dalam waktu 1 jam dari bandara interasional Juanda, Surabaya. Fasilitas transportasi umum dalam kota yang bisa digunakan untuk menuju ke Polinema juga sangat memadai.</p>
+              <p>Politeknik Tadika Mesra adalah institusi pendidikan tinggi vokasi yang terletak di kota Malang. Malang adalah kota terbesar kedua di Jawa Timur,Indonesia. Malang merupakan tempat yang nyaman untuk belajar karena udaranya yang sejuk dan populasi yang tidak begitu padat (sekitar 800 ribu penduduk). Di Malang terdapat banyak sekolah, universitas dan institusi pendidikan lainnya dengan kualitas yang bagus. Selain itu, Malang merupakan tempat yang mudah dijangkau. Kota ini dapat ditempuh dalam waktu 1 jam dari bandara interasional Juanda, Surabaya. Fasilitas transportasi umum dalam kota yang bisa digunakan untuk menuju ke Polinema juga sangat memadai.</p>
               <hr>
-              <h4>Available Colors</h4>
+              <h4>Tingkatan</h4>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-default text-center active">
                   <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked="">

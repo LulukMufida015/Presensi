@@ -108,12 +108,12 @@ class DosenController extends Controller
             ]);
         // dd($request->all());
             $dosen = Dosen::find($id);
-            if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $dosen->foto))) {
+            if ($dosen->foto && file_exists(storage_path('app/public/' . $dosen->foto))) {
                 \Storage::delete('public/' . $dosen->foto);
             }
             $image_name = $request->file('foto')->store('images', 'public');
             $dosen->nip = $request->get('nip');
-            $dosen->nama = $request->get('nama');
+            $dosen->nama_dosen = $request->get('nama_dosen');
             $dosen->foto = $image_name;
             $dosen->jenis_kelamin = $request->get('jenis_kelamin');
             $dosen->no_handphone = $request->get('no_handphone');
@@ -132,8 +132,8 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
-        $Dosen->delete();
+        Dosen::find($id)->delete();
         return redirect()->route('dosen.index')
-        -> with('success', 'Dosen Berhasil Dihapus');
+        -> with('success', 'Data dosen Berhasil Dihapus');
     }
 }

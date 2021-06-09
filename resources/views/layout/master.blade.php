@@ -7,7 +7,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sistem Presensi | Tadika Mesar</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <title>Presensi | Tadika Mesra</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,18 +39,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-user-circle"></i>
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <i class="far fa-user-circle"></i>
+            {{ Auth::user()->name }} 
+          </a>
+        
+        
           {{-- <span class="badge badge-warning navbar-badge">15</span> --}}
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> Logout
-            {{-- <span class="float-right text-muted text-sm">2 days</span> --}}
-          </a> 
-          {{-- <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Logout</a> --}}
-        </div>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('logout') }}"
+             onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+              {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form>
+      </div>
       </li>
       
       
@@ -60,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="dist/img/mesra.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Presensi</span>
     </a>
 
@@ -69,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Admin</a>
@@ -139,6 +148,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <i class="nav-icon fas fa-clipboard"></i>
               <p>
                 Jadwal
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/Presensi" class="nav-link">
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>
+                Presensi
               </p>
             </a>
           </li>

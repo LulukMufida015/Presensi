@@ -45,7 +45,7 @@
                             <th>Nama Matakuliah</th>
                             <th>SKS</th>
                             <th>Jam</th>
-                            <th>Dosen Id</th>
+                            <th>Nama Dosen</th>
                             <th>Action</th>
                           </tr>
                         </thead>

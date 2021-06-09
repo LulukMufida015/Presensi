@@ -37,7 +37,15 @@ Route::resource('jam', JamController::class);
 Route::resource('matakuliah', MatakuliahController::class);
 Route::get('home', [HomeController::class, 'index']);
 
-
+Route::get('/laporan', function () {
+     return view('page.laporan');
+ });
+ Route::get('/Presensi', function () {
+    return view('page.presensi');
+});
+Route::get('/jadwal', function () {
+    return view('page.jadwal');
+});
 
 Auth::routes();
 
