@@ -54,8 +54,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <input type="text" class="form-control" id="jenis_kelamin"
-                                        placeholder="Jenis-Kelamin" name="jenis_kelamin">
+                                    <select name="jenis_kelamin" id="" class="form-control">
+                                        <option value="1">Laki-Laki</option>
+                                        <option value="2">Perempuan</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="No-Handphone">No Handphone</label>

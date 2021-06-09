@@ -6,12 +6,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Tabel Daftar Dosen</h1>
+              <h1>Tabel Daftar Jadwa</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Tabel Dosen</li>
+                <li class="breadcrumb-item active">Tabel jadwal</li>
               </ol>
             </div>
           </div>
@@ -23,7 +23,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-success" href="{{ route('dosen.create') }}"> Input Dosen</a>
+                        <a class="btn btn-success" href="{{ route('jadwal.create') }}"> Input Jadwal</a>
       
                       <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -42,32 +42,22 @@
                       <table class="table table-head-fixed text-nowrap">
                         <thead>
                           <tr>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>No Handphone</th>
-                            <th>Alamat</th>
+                            <th>Nama Dosen</th>
+                            <th>Kelas</th>
+                            <th>Jam Ke</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($Dosen as $dsn)
+                            @foreach ($jadwal as $jdwl)
                             <tr>
-                                <td>{{ $dsn->nip }}</td>
-                                <td>{{ $dsn->nama_dosen }}</td>
+                                <td>{{ $jdwl->dosen->nama_dosen }}</td>
+                                <td>{{ $jdwl->kelas->nama_kelas }}</td>
+                                <td>{{ $jdwl->jam->nama }}</td>
                                 <td>
-                                  @if($dsn->jenis_kelamin==1)
-                                  Laki - laki
-                                  @else
-                                  Peremouan
-                                  @endif
-                                </td>
-                                <td>{{ $dsn->no_handphone }}</td>
-                                <td>{{ $dsn->alamat }}</td>
-                                <td>
-                                <form action="{{ route('dosen.destroy',['dosen'=>$dsn->id]) }}" method="POST">
-                                  <a class="btn btn-info" href="{{ route('dosen.show',['dosen'=>$dsn->id]) }}">Show</a>
-                                <a class="btn btn-primary" href="{{ route('dosen.edit',['dosen'=>$dsn->id]) }}">Edit</a>
+                                <form action="{{ route('jadwal.destroy',['jadwal'=>$jdwl->id]) }}" method="POST">
+                                  <a class="btn btn-info" href="{{ route('jadwal.show',['jadwal'=>$jdwl->id]) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('jadwal.edit',['jadwal'=>$jdwl->id]) }}">Edit</a>
                                 @csrf 
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

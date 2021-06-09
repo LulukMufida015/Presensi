@@ -7,6 +7,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\JamController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalController;
 
 
 /*
@@ -35,6 +36,7 @@ Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('kelass', KelasController::class);
 Route::resource('jam', JamController::class);
 Route::resource('matakuliah', MatakuliahController::class);
+Route::resource('jadwal', JadwalController::class);
 Route::get('home', [HomeController::class, 'index']);
 
 Route::get('/laporan', function () {
@@ -43,9 +45,9 @@ Route::get('/laporan', function () {
  Route::get('/Presensi', function () {
     return view('page.presensi');
 });
-Route::get('/jadwal', function () {
-    return view('page.jadwal');
-});
+// Route::get('/jadwal', function () {
+//     return view('page.jadwal');
+// });
 
 Auth::routes();
 

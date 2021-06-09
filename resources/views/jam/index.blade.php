@@ -44,6 +44,7 @@
                           <tr>
                             <th>Nama</th>
                             <th>Mulai</th>
+                            <th>Toleransi Waktu</th>
                             <th>Selesai</th>
                             <th>Action</th>
                           </tr>
@@ -53,6 +54,7 @@
                           <tr>
                               <td>{{ $jm->nama }}</td>
                               <td>{{ $jm->mulai }}</td>
+                              <td>{{ $jm->toleransi_waktu }}</td>
                               <td>{{ $jm->selesai }}</td>
                               <td>
                               <form action="{{ route('jam.destroy', $jm->id) }}" method="POST">

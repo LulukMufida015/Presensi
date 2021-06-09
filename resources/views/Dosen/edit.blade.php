@@ -50,8 +50,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Jenis-Kelamin">Jenis Kelamin</label>
-                                    <input type="text" class="form-control" id="Jenis-Kelamin"
-                                        placeholder="Jenis-Kelamin" value="{{ $dosen->jenis_kelamin }}" name="jenis_kelamin">
+                                    <select name="jenis_kelamin" id="" value="{{ $dosen->jenis_kelamin }}" class="form-control">
+                                        <option value="1">Laki-Laki</option>
+                                        <option value="2">Perempuan</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="No-Handphone">No Handphone</label>

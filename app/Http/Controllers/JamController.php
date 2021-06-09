@@ -45,6 +45,7 @@ class JamController extends Controller
         $request->validate([
             'nama' => 'required',
             'mulai' => 'required',
+            'toleransi_waktu' => 'required',
             'selesai' => 'required',
         ]);
         Jam::create($request->all());
@@ -89,6 +90,7 @@ class JamController extends Controller
         $request->validate([
             'nama' => 'required',
             'mulai' => 'required',
+            'toleransi_waktu' => 'required',
             'selesai' => 'required',
             ]);
             //fungsi eloquent untuk mengupdate data inputan kita

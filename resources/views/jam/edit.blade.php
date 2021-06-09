@@ -38,12 +38,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Mulai">Mulai</label>
-                                    <input type="text" class="form-control" id="Mulai"
+                                    <input type="time" class="form-control" id="Mulai"
                                         placeholder="Mulai" value="{{ $jam->mulai }}" name="mulai">
                                 </div>
                                 <div class="form-group">
+                                    <label for="toleransi_waktu">Toleransi Waktu</label>
+                                    <input type="time" class="form-control" id="toleransi_waktu"
+                                        placeholder="toleransi_waktu" value="{{ $jam->toleransi_waktu }}" name="toleransi_waktu">
+                                </div>
+                                <div class="form-group">
                                     <label for="Selesai">Selesai</label>
-                                    <input type="text" class="form-control" id="Selesai"
+                                    <input type="time" class="form-control" id="Selesai"
                                         placeholder="Selesai" value="{{ $jam->selesai }}" name="selesai">
                                 </div>
                             </div>

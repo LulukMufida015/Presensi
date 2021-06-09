@@ -41,6 +41,11 @@
                                         placeholder="Mulai" name="mulai">
                                 </div>
                                 <div class="form-group">
+                                    <label for="toleransi_waktu">TOleransi Waktu</label>
+                                    <input type="time" class="form-control" id="toleransi_waktu"
+                                        placeholder="Mulai" name="toleransi_waktu">
+                                </div>
+                                <div class="form-group">
                                     <label for="Selesai">Selesai</label>
                                     <input type="time" class="form-control" id="Selesai"
                                         placeholder="Selesai" name="selesai">

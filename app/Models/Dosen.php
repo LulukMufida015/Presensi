@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Matakuliah;
+use App\Models\Jadwal;
 
 class Dosen extends Model
 {
@@ -21,5 +22,9 @@ class Dosen extends Model
     public function matakuliah()
     {
         return $this->hasOne(Matakuliah::class);
+    }
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class);
     }
 }
