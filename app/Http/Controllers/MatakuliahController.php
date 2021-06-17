@@ -52,7 +52,7 @@ class MatakuliahController extends Controller
         $matakuliah->jam = $request->get('jam');
             $dosen = new Dosen;
             $dosen->id = $request->get('id_dosen');
-
+            
         //fungsi eloquent untuk menambah data dengan relasi belongsTo
             $matakuliah->dosen()->associate($dosen);
             $matakuliah->save();

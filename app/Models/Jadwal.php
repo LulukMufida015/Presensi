@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Dosen;
 use App\Models\Kelas;
 use App\Models\Jam;
+use App\Models\Presensi;
 
 class Jadwal extends Model
 {
@@ -28,5 +29,8 @@ class Jadwal extends Model
     public function Jam()
     {
         return $this->belongsTo(Jam::class);
+    }
+    public function presensi(){
+        return $this->hasMany(Presensi::class);
     }
 }

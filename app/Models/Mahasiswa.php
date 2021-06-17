@@ -24,4 +24,7 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+    public function presensi(){
+        return $this->hasMany(Presensi::class);
+    }
 }
