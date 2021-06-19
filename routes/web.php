@@ -32,18 +32,8 @@ Auth::routes();
 Route::get('/', function () {
     return redirect('login');
 });
-Route::resource('dosen', DosenController::class);
-Route::resource('mahasiswa', MahasiswaController::class);
-Route::resource('kelass', KelasController::class);
-Route::resource('jam', JamController::class);
-Route::resource('matakuliah', MatakuliahController::class);
-Route::resource('jadwal', JadwalController::class);
-Route::resource('presensi', PresensiController::class);
-Route::get('home', [HomeController::class, 'index']);
 
-Route::get('/laporan', function () {
-     return view('page.laporan');
- });
+
 //  Route::get('/Presensi', function () {
 //     return view('page.presensi');
 // });
@@ -54,3 +44,17 @@ Route::get('/laporan', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth' , 'administrator'])->group (function(){
+    Route::resource('dosen', DosenController::class);
+    Route::resource('mahasiswa', MahasiswaController::class);
+    Route::resource('kelass', KelasController::class);
+    Route::resource('jam', JamController::class);
+    Route::resource('matakuliah', MatakuliahController::class);
+    Route::resource('jadwal', JadwalController::class);
+    Route::resource('presensi', PresensiController::class);
+    Route::get('home', [HomeController::class, 'index']);
+    Route::get('/laporan', function () {
+        return view('page.laporan');
+    });
+});
