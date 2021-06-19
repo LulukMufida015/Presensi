@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('NotAdmin/master2')
 @section('content')
 
 <div class="content-wrapper">
@@ -23,7 +23,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                        <a class="btn btn-success" href="{{ route('presensi.create') }}"> Input Presensi</a>
+                        
       
                       <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -58,6 +58,7 @@
                                 <td>{{ $prs->status}}</td>
                                 <td>
                                 <form action="{{ route('presensi.destroy',['presensi'=>$prs->id]) }}" method="POST">
+                                  <a class="btn btn-success" href="{{ route('presensi.create',['presensi'=>$prs->id]) }}"> Submit </a>
                                   <a class="btn btn-info" href="{{ route('presensi.show',['presensi'=>$prs->id]) }}">Show</a>
                                 <a class="btn btn-primary" href="{{ route('presensi.edit',['presensi'=>$prs->id]) }}">Edit</a>
                                 @csrf 

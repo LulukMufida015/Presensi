@@ -1,4 +1,4 @@
-@extends('layout/master')
+@extends('NotAdmin/master2')
 @section('content')
 
 <div class="content-wrapper">
@@ -63,7 +63,7 @@
                       </table>
                     </div>
                     <!-- /.card-body -->
-                    <a class="btn btn-block btn-secondary" href="#"> Cetak PDF</a>
+                    <a class="btn btn-block btn-primary" href="#"> Cetak PDF</a>
                   </div>
                   <!-- /.card -->
                 </div>
