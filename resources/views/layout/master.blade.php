@@ -159,14 +159,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="/laporan" class="nav-link">
               <i class="nav-icon fas fa-phone-square"></i>
               <p>
                 Laporan
               </p>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

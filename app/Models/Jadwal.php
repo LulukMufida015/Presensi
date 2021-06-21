@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Dosen;
+use App\Models\Jam;
+use App\Models\Kelas;
+use App\Models\Presensi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Dosen;
-use App\Models\Kelas;
-use App\Models\Jam;
-use App\Models\Presensi;
 
 class Jadwal extends Model
 {
@@ -17,7 +17,7 @@ class Jadwal extends Model
         'dosen_id',
         'kelas_id',
         'jam_id',
-        ];
+    ];
     public function dosen()
     {
         return $this->belongsTo(Dosen::class);
@@ -30,7 +30,8 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Jam::class);
     }
-    public function presensi(){
+    public function presensi()
+    {
         return $this->hasMany(Presensi::class);
     }
 }

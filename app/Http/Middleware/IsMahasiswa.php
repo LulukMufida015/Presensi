@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\http\Request;
 use Illuminate\Contracts\Auth\Guard;
 
-class IsAdmin
+class IsMahasiswa
 {
     /**
      * the guard implementation.

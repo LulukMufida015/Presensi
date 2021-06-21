@@ -1,6 +1,6 @@
-@extends('NotAdmin/master2')
+@extends('layout/Master2')
 @section('content')
-
+@php $model = new App\Models\Presensi() @endphp
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -23,49 +23,61 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                        
-      
-                      <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                          <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-      
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                              <i class="fas fa-search"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                      @if ($hasabsen == 0)
+                        <a class="btn btn-success" href="{{ route('presensi.store') }}"> Absen </a>
+                      @endif
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0" style="height: 400px;">
+                     
                       <table class="table table-head-fixed text-nowrap">
                         <thead>
                           <tr>
                             <th>Id</th>
-                            <th>Nama Mahasiswa</th>
-                            <th>Id Jadwal</th>
+                            <th>Jadwal</th>
+                            <th>Batas Absen</th>
+                            <th>Jam Absen</th>
+                            <th>Tanggal Absen</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($presensi as $prs)
+                            @foreach ($jadwal as $key => $prs)
+                            @php $cek = $model->cekAbsen($mahasiswaid,$prs->id) @endphp
                             <tr>
-                                <td>{{ $prs->id }}</td>
-                                <td>{{ $prs->mahasiswa->nama_kelas }}</td>
-                                <td>{{ $prs->jadwal_id }}</td>
-                                <td>{{ $prs->status}}</td>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $prs->jam->nama }}</td>
+                                <td>{{ $prs->jam->mulai }}</td>
+                                @if($cek[0] == 'ada')
+                                <td>{{\Carbon\Carbon::parse($cek[1]->created_at)->format('H:i:s')}}</td>
+                                @else
+                                <td>-</td>
+                                @endif
+                                @if($cek[0] == 'ada')
+                                <td>{{\Carbon\Carbon::parse($cek[1]->created_at)->format('Y-m-d')}}</td>
+                                @else
+                                <td>-</td>
+                                @endif
                                 <td>
-                                <form action="{{ route('presensi.destroy',['presensi'=>$prs->id]) }}" method="POST">
-                                  <a class="btn btn-success" href="{{ route('presensi.create',['presensi'=>$prs->id]) }}"> Submit </a>
-                                  <a class="btn btn-info" href="{{ route('presensi.show',['presensi'=>$prs->id]) }}">Show</a>
-                                <a class="btn btn-primary" href="{{ route('presensi.edit',['presensi'=>$prs->id]) }}">Edit</a>
-                                @csrf 
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                  @if($cek[0] == 'ada')
+                                    @if($cek[1]->created_at <= $prs->jam->toleransi_waktu)
+                                    Masuk
+                                    @else
+                                    Telat
+                                    @endif
+                                  @else
+                                  Belum Absen
+                                  @endif
                                 </td>
+                                <td>
+                                  @if($cek[0] == 'ada')
+
+                                  @else
+                                  <a class="btn btn-success" href="{{ url('presensi/submit/'.$prs->id) }}"> Absen </a>
+                                  @endif
+                                </td>
+
                             </tr>
                             @endforeach
                         </tbody>

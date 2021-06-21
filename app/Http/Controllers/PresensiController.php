@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Presensi;
-use App\Models\Jadwal;
-use App\Models\Mahasiswa;
 use App\Models\Dosen;
+use App\Models\Jadwal;
 use App\Models\jam;
+use App\Models\Mahasiswa;
+use App\Models\Presensi;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PresensiController extends Controller
 {
@@ -20,12 +22,27 @@ class PresensiController extends Controller
     {
         $this->middleware('auth');
     }
-     public function index()
+
+    public function index()
     {
         $presensi = Presensi::with('jadwal', 'mahasiswa')->get();
-        $posts = Presensi::orderBy('id', 'desc')->paginate(6);
-        return view('presensi.index', compact('presensi'));
-        with('i', (request()->input('page', 1) - 1) * 5);
+        $idjadwal = 0;
+        $mahasiswa = Mahasiswa::where('id_user', Auth::user()->id)->first();
+        $jadwal = Jadwal::with('kelas', 'jam', 'presensi')->where('kelas_id', $mahasiswa->kelas->id)->get();
+        //return $jadwal;
+        $mahasiswaid = $mahasiswa->id;
+        $check = Presensi::where('mahasiswa_id', $mahasiswa->id)->first();
+        $timetoabsen = 'none';
+        if ($check) {
+            $timetoabsen = Carbon::parse($check->created_at)->format('Y-m-d');
+        }
+        $now = Carbon::now()->format('Y-m-d');
+        $hasabsen = 0;
+        if ($timetoabsen == $now) {
+            $hasabsen = 1;
+        }
+        //return $check;
+        return view('presensi.index', compact('presensi', 'check', 'hasabsen', 'jadwal', 'mahasiswaid'));
     }
 
     /**
@@ -37,7 +54,7 @@ class PresensiController extends Controller
     {
         $mahasiswa = Mahasiswa::all();
         $jadwal = Jadwal::all();
-        
+
         return view('presensi.create', compact('jadwal', 'mahasiswa'));
     }
 
@@ -47,17 +64,23 @@ class PresensiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($jadwal_id)
     {
-        // dd($request->all());
-        $request->validate([
-            'mahasiswa_id' => 'required',
-            'jadwal_id' => 'required',
-            'status' => 'required',
+
+        $mahasiswa = Mahasiswa::with('kelas')->where('id_user', Auth::user()->id)->first();
+        // dd($mahasiswa->kelas->id);
+        $jadwal = Jadwal::with('kelas')->where('id', $jadwal_id)->first();
+        if (date('H:i:s') <= $jadwal->jam->toleransi_waktu) {
+            $status = 'Masuk';
+        } else {
+            $status = 'Telat';
+        }
+        Presensi::create([
+            'mahasiswa_id' => $mahasiswa->id,
+            'jadwal_id' => $jadwal->id,
+            'status' => $status,
         ]);
-        
-        Presensi::create($request->all());
-        
+
         return redirect()->route('presensi.index')
             ->with('success', 'presensi Berhasil Ditambahkan');
     }

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Jadwal;
+use App\Models\Mahasiswa;
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Mahasiswa;
-use App\Models\Jadwal;
 
 class presensi extends Model
 {
@@ -17,10 +18,22 @@ class presensi extends Model
         'status',
     ];
 
-    public function mahasiswa(){
+    public function mahasiswa()
+    {
         return $this->belongsTo(Mahasiswa::class);
     }
-    public function jadwal(){
+    public function jadwal()
+    {
         return $this->belongsTo(Jadwal::class);
+    }
+
+    public function cekAbsen($id_mahasiwa, $jadwalid)
+    {
+        $data = DB::table('presensi')->where('mahasiswa_id', $id_mahasiwa)->where('jadwal_id', $jadwalid)->first();
+        if ($data) {
+            return $arr = ['ada', $data];
+        } else {
+            return $arr = ['belum', $data = []];
+        }
     }
 }
