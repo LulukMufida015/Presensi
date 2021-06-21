@@ -25,4 +25,8 @@ class HomeController extends Controller
     {
         return view('page.home');
     }
+    public function indexMahasiswa()
+    {
+        return view('NotAdmin.home');
+    }
 }

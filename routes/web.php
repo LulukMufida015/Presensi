@@ -58,12 +58,13 @@ Route::middleware(['auth' , 'administrator'])->group (function(){
         return view('page.laporan');
     });
 });
+Route::middleware(['auth' , 'mahasiswa'])->group (function(){
+    Route::get('/home/mahasiswa', [HomeController::class, 'indexMahasiswa']);
+    Route::get('/profil', function () {
+        return view('NotAdmin.mahasiswa');
+    });
+    Route::resource('presensi', PresensiController::class);
+    route::get('/laporan', [LaporanController::class, 'index']);
+});
 
-Route::get('/profil', function () {
-    return view('NotAdmin.mahasiswa');
-});
-Route::get('/home', function () {
-    return view('NotAdmin.home');
-});
-Route::resource('presensi', PresensiController::class);
-route::get('/laporan', [LaporanController::class, 'index']);
+
