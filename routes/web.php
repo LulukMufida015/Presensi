@@ -9,7 +9,7 @@ use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PresensiController;
-
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,9 +52,19 @@ Route::middleware(['auth' , 'administrator'])->group (function(){
     Route::resource('jam', JamController::class);
     Route::resource('matakuliah', MatakuliahController::class);
     Route::resource('jadwal', JadwalController::class);
-    Route::resource('presensi', PresensiController::class);
+    
     Route::get('home', [HomeController::class, 'index']);
     Route::get('/laporan', function () {
         return view('page.laporan');
     });
 });
+Route::middleware(['auth' , 'mahasiswa'])->group (function(){
+    Route::get('/home/mahasiswa', [HomeController::class, 'indexMahasiswa']);
+    Route::get('/profil', function () {
+        return view('NotAdmin.mahasiswa');
+    });
+    Route::resource('presensi', PresensiController::class);
+    route::get('/laporan', [LaporanController::class, 'index']);
+});
+
+

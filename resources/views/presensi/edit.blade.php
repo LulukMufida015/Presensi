@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('NotAdmin/master2')
 @section('content')
 
 <div class="content-wrapper">
