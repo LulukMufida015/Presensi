@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -54,6 +55,12 @@ class MahasiswaController extends Controller
             'no_handphone' => 'required',
             'alamat' => 'required',
         ]);
+        $user = new User;
+        $user->name = $request->nama;
+        $user->email = $request->nim.'@gmail.com';
+        $user->password = bcrypt($request->nim);
+        $user->roles = 'mahasiswa';
+        $user->save();
 
         $image = $request->file('foto');
         if ($image) {
@@ -61,6 +68,7 @@ class MahasiswaController extends Controller
         }
         // dd($request->all());
         $mahasiswa = new Mahasiswa;
+        $mahasiswa->id_user = $user->id;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
         $mahasiswa->foto = $image_name;
