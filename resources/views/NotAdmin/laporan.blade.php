@@ -42,9 +42,9 @@
                       <table class="table table-head-fixed text-nowrap">
                         <thead>
                           <tr>
-                            <th>Id</th>
+                            <th>NIM</th>
                             <th>Nama Mahasiswa</th>
-                            <th>Id Jadwal</th>
+                            <th>Matakuliah</th>
                             <th>Status</th>
                             
                           </tr>
@@ -52,9 +52,9 @@
                         <tbody>
                             @foreach ($presensi as $prs)
                             <tr>
-                                <td>{{ $prs->id }}</td>
-                                <td>{{ $prs->mahasiswa->nama_kelas }}</td>
-                                <td>{{ $prs->jadwal_id }}</td>
+                                <td>{{ $prs->mahasiswa->nim }}</td>
+                                <td>{{ $prs->mahasiswa->nama }}</td>
+                                <td>{{ $prs->jadwal->dosen->matakuliah->nama_matakuliah }}</td>
                                 <td>{{ $prs->status}}</td>
                                 
                             </tr>
@@ -63,7 +63,7 @@
                       </table>
                     </div>
                     <!-- /.card-body -->
-                    <a class="btn btn-block btn-primary" href="#"> Cetak PDF</a>
+                    <a class="btn btn-block btn-primary" href="{{url('laporan/cetak_pdf')}}"> Cetak PDF</a>
                   </div>
                   <!-- /.card -->
                 </div>

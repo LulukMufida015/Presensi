@@ -21,7 +21,7 @@ class Dosen extends Model
     ];
     public function matakuliah()
     {
-        return $this->hasOne(Matakuliah::class);
+        return $this->hasOne(Matakuliah::class,'id_dosen');
     }
     public function jadwal()
     {

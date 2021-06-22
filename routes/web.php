@@ -62,5 +62,6 @@ Route::middleware(['auth', 'mahasiswa'])->group(function () {
     Route::get('/profil/{id}', [ProfileController::class, 'index']);
     Route::get('presensi', [PresensiController::class, 'index'])->name('presensi.index');
     Route::get('presensi/submit/{id}', [PresensiController::class, 'store']);
-    route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf']);
 });
