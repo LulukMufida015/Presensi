@@ -32,7 +32,7 @@
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><b>Nim: </b>{{$dosen->nip}}</li>
-                                    <li class="list-group-item"><b>Nama: </b>{{$dosen->nama}}</li>
+                                    <li class="list-group-item"><b>Nama: </b>{{$dosen->nama_dosen}}</li>
                                     <li class="list-group-item"><b>Jenis Kelamin: </b>{{$dosen->jenis_kelamin}}</li>
                                     <li class="list-group-item"><b>No_Handphone: </b>{{$dosen->no_handphone}}</li>
                                     <li class="list-group-item"><b>Alamat: </b>{{$dosen->alamat}}</li>

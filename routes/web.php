@@ -11,6 +11,7 @@ use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +52,10 @@ Route::middleware(['auth', 'administrator'])->group(function () {
     Route::resource('jam', JamController::class);
     Route::resource('matakuliah', MatakuliahController::class);
     Route::resource('jadwal', JadwalController::class);
-
+    Route::get('/laporan/admin', [LaporanAdminController::class, 'indexLaporan']);
+    Route::get('/laporan/admin/cetak_pdf', [LaporanAdminController::class, 'cetak_pdf']);
     Route::get('home', [HomeController::class, 'index']);
-    Route::get('/laporan', function () {
-        return view('page.laporan');
-    });
+    
 });
 Route::middleware(['auth', 'mahasiswa'])->group(function () {
     Route::get('/home/mahasiswa', [HomeController::class, 'indexMahasiswa']);

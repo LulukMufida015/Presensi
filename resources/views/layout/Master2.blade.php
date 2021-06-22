@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-toggle="dropdown" href="#">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             <i class="far fa-user-circle"></i>
-            {{-- {{ Auth::user()->name }}  --}}
+            {{ Auth::user()->name }} 
           </a>
         
         

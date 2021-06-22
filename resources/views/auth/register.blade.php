@@ -78,7 +78,7 @@
         <div class="social-auth-links text-center">
           <p>- OR -</p>
           <a href="{{ route('login') }}" class="btn btn-block btn-primary">
-            <i class="fab fa-facebook mr-2"></i>
+            <i class=""></i>
             Sign In
           </a>
           {{-- <a href="#" class="btn btn-block btn-danger">

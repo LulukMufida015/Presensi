@@ -28,7 +28,7 @@
             <div class="col-12 col-sm-6">
               <h3 class="d-inline-block d-sm-none">POLITEKNIK TADIKA MESRA</h3>
               <div class="col-12">
-                <img src="../../dist/img/sekolah.jpg" class="product-image" alt="Product Image">
+                <img src="../../dist/img/kampus-1.jpg" class="product-image" alt="Product Image">
               </div>
             
             </div>

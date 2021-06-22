@@ -98,23 +98,25 @@ class DosenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nip' => 'required',
-            'nama_dosen' => 'required',
-            'foto' => 'required',
-            'jenis_kelamin' => 'required',
-            'no_handphone' => 'required',
-            'alamat' => 'required',
-            ]);
+        // $request->validate([
+        //     'nip' => 'required',
+        //     'nama_dosen' => 'required',
+        //     'foto' => 'required',
+        //     'jenis_kelamin' => 'required',
+        //     'no_handphone' => 'required',
+        //     'alamat' => 'required',
+        //     ]);
         // dd($request->all());
             $dosen = Dosen::find($id);
             if ($dosen->foto && file_exists(storage_path('app/public/' . $dosen->foto))) {
                 \Storage::delete('public/' . $dosen->foto);
             }
-            $image_name = $request->file('foto')->store('images', 'public');
+            if($request->file('foto')!=null){
+                $image_name = $request->file('foto')->store('images', 'public');
+                $mahasiswa->foto = $image_name;
+            }
             $dosen->nip = $request->get('nip');
             $dosen->nama_dosen = $request->get('nama_dosen');
-            $dosen->foto = $image_name;
             $dosen->jenis_kelamin = $request->get('jenis_kelamin');
             $dosen->no_handphone = $request->get('no_handphone');
             $dosen->alamat = $request->get('alamat');
@@ -130,9 +132,9 @@ class DosenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dosen $dosen)
     {
-        Dosen::find($id)->delete();
+        $dosen->delete();
         return redirect()->route('dosen.index')
         -> with('success', 'Data dosen Berhasil Dihapus');
     }

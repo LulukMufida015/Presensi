@@ -56,7 +56,7 @@
                                 <td>{{ $jdwl->jam->nama }}</td>
                                 <td>
                                 <form action="{{ route('jadwal.destroy',['jadwal'=>$jdwl->id]) }}" method="POST">
-                                  <a class="btn btn-info" href="{{ route('jadwal.show',['jadwal'=>$jdwl->id]) }}">Show</a>
+                                  {{-- <a class="btn btn-info" href="{{ route('jadwal.show',['jadwal'=>$jdwl->id]) }}">Show</a> --}}
                                 <a class="btn btn-primary" href="{{ route('jadwal.edit',['jadwal'=>$jdwl->id]) }}">Edit</a>
                                 @csrf 
                                 @method('DELETE')

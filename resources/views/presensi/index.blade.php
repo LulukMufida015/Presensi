@@ -23,9 +23,9 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      @if ($hasabsen == 0)
+                      {{-- @if ($hasabsen == 0)
                         <a class="btn btn-success" href="{{ route('presensi.store') }}"> Absen </a>
-                      @endif
+                      @endif --}}
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0" style="height: 400px;">
@@ -48,7 +48,8 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $prs->jam->nama }}</td>
-                                <td>{{ $prs->jam->mulai }}</td>
+                                <td>{{ $prs->jam->toleransi_waktu
+                                 }}</td>
                                 @if($cek[0] == 'ada')
                                 <td>{{\Carbon\Carbon::parse($cek[1]->created_at)->format('H:i:s')}}</td>
                                 @else
@@ -61,9 +62,9 @@
                                 @endif
                                 <td>
                                   @if($cek[0] == 'ada')
-                                    @if($cek[1]->created_at <= $prs->jam->toleransi_waktu)
+                                    @if($prs->jam->toleransi_waktu <= $cek[1]->created_at)
                                     Masuk
-                                    @else
+                                    @else 
                                     Telat
                                     @endif
                                   @else

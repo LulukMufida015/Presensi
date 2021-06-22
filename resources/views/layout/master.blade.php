@@ -152,10 +152,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="/presensi" class="nav-link">
+            <a href="/laporan/admin" class="nav-link">
               <i class="nav-icon fas fa-clipboard"></i>
               <p>
-                Presensi
+                Laporan
               </p>
             </a>
           </li>

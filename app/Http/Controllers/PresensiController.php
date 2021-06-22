@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use App\Models\Jadwal;
+use App\Models\Kelas;
 use App\Models\jam;
 use App\Models\Mahasiswa;
 use App\Models\Presensi;
