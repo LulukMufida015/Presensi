@@ -50,7 +50,7 @@ Route::middleware(['auth', 'administrator'])->group(function () {
     Route::resource('mahasiswa', MahasiswaController::class);
     Route::resource('kelass', KelasController::class);
     Route::resource('jam', JamController::class);
-    Route::resource('matakuliah', MatakuliahController::class);
+    Route::resource('Matakuliah', MatakuliahController::class);
     Route::resource('jadwal', JadwalController::class);
     Route::get('/laporan/admin', [LaporanAdminController::class, 'indexLaporan']);
     Route::get('/laporan/admin/cetak_pdf', [LaporanAdminController::class, 'cetak_pdf']);

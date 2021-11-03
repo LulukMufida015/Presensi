@@ -116,12 +116,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Mahasiswa</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="/dosen" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dosen</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="/matakuliah" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
