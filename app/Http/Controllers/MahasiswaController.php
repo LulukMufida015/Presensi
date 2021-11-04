@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Aws\S3\S3Client;
 
 class MahasiswaController extends Controller
 {
@@ -64,14 +65,40 @@ class MahasiswaController extends Controller
 
         $image = $request->file('foto');
         if ($image) {
-            $image_name = $request->file('foto')->store('images', 'public');
+            // $image_name = $request->file('foto')->store('images', 'public');
+            $file = $request->file('foto');
+            $file_name = $file->getClientOriginalName();
+            $folder = 'foto_mahasiswa';
+
+            $endpoint = 'https://objectstorage.ap-sydney-1.oraclecloud.com/p/WkE8UWMfyl17I3UTnN5vgQbZA5bvfU4JJVRjq8aunfA0__52dy41DQ3C3sWpdKVb/n/sdg6cgxigeov/b/utscc/o/';
+
+            $s3 = new S3Client([
+                        'region'  => 'ap-sydney-1',
+                        'version' => 'latest',
+                        'credentials' => [
+                            'key'    => '51bbbf9327bf9c4a392bee28ac2e9ddc5bc0d192',
+                            'secret' => 'clw+ErDdMn8xyc0PQbB2IUIyeg4lnsqlzdLXCflTqQ0='
+                        ],
+                        'bucket_endpoint' => true,
+                        'endpoint' => $endpoint
+                    ]);
+
+                    $s3->putObject([
+                        'Bucket' => $folder,
+                        'Key' => $file_name,
+                        'SourceFile' => $file,
+                        'StorageClass' => 'REDUCED_REDUNDANCY'
+                    ]);
+                    $resultUrlImage =  $endpoint . $folder . '/' . $file_name;
+ 
+
         }
         // dd($request->all());
         $mahasiswa = new Mahasiswa;
         $mahasiswa->id_user = $user->id;
         $mahasiswa->nim = $request->get('nim');
         $mahasiswa->nama = $request->get('nama');
-        $mahasiswa->foto = $image_name;
+        $mahasiswa->foto = $resultUrlImage ;
         $mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
         $mahasiswa->no_handphone = $request->get('no_handphone');
         $mahasiswa->alamat = $request->get('alamat');

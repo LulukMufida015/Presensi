@@ -27,7 +27,7 @@
                         <div class="row justify-content-center align-items-center">
                             <div class="card" style="width: 30rem;">
                             <div class="card-header" style="text-align: center">
-                            <img width="100px" height="100px" src="{{asset('storage/'.$mahasiswa->foto)}}">
+                            <img width="100px" height="100px" src="{{$mahasiswa->foto}}">
                             </div>
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
